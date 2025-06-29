@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <style>
+        /* التنسيق العام المحدث */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #f09323, #fdba2b);
+            --secondary-gradient: linear-gradient(135deg, rgba(240, 147, 35, 0.1), rgba(253, 186, 43, 0.1));
+            --shadow-soft: 0 10px 40px rgba(240, 147, 35, 0.1);
+            --shadow-hover: 0 20px 60px rgba(240, 147, 35, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            color: #2c3e50;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* particles background */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #f09323, #fdba2b);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* الهيدر المحدث */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow-soft);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .logo img {
+            height: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 8px rgba(240, 147, 35, 0.2));
+        }
+
+        .logo img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            padding: 10px 15px;
+            border-radius: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 25px;
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        nav ul li a:hover::before {
+            transform: scale(1);
+        }
+
+        nav ul li a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .contact-btn, .about-btn {
+            padding: 12px 28px;
+            background: var(--secondary-gradient);
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before, .about-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .contact-btn:hover::before, .about-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .contact-btn:hover, .about-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* البانر المحدث */
+        .gradient-banner {
+            width: calc(100% - 80px);
+            height: 400px;
+            margin: 40px;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--glass-border);
+        }
+
+        .gradient-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+            z-index: 1;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .banner-slider {
+            width: 100%;
+            height: 100%;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 40px;
+        }
+
+        /* عناصر التحكم في السلايدر المحدثة */
+        .slick-prev, .slick-next {
+            width: 60px;
+            height: 60px;
+            z-index: 10;
+            background: var(--glass-bg) !important;
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .slick-prev:hover, .slick-next:hover {
+            background: var(--primary-gradient) !important;
+            transform: scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .slick-prev:hover:before, .slick-next:hover:before {
+            color: white !important;
+        }
+
+        .slick-dots {
+            bottom: 30px !important;
+        }
+
+        .slick-dots li button:before {
+            font-size: 14px !important;
+            color: white !important;
+            opacity: 0.6 !important;
+            transition: all 0.3s ease;
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: #f09323 !important;
+            opacity: 1 !important;
+            transform: scale(1.3);
+        }
+
+        /* الأقسام المحدثة */
+        .section {
+            margin: 60px 40px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services-header, .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .services-header h2, .section-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2c3e50;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .services-header h2::after, .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 5px;
+            bottom: -12px;
+            right: 0;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.2); }
+        }
+
+        .view-all {
+            color: #7f8c8d;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-all::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            transform: scale(0);
+            border-radius: 25px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .view-all:hover::before {
+            transform: scale(1);
+        }
+
+        .view-all:hover {
+            color: #f09323;
+            transform: translateX(-8px);
+        }
+
+        /* الحاويات القابلة للتمرير */
+        .scroll-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .services-container, .categories-container, .products-container {
+            display: flex;
+            gap: 30px;
+            padding: 20px 10px;
+            scroll-behavior: smooth;
+            cursor: grab;
+            user-select: none;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .services-container::-webkit-scrollbar,
+        .categories-container::-webkit-scrollbar,
+        .products-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .services-container::-webkit-scrollbar-track,
+        .categories-container::-webkit-scrollbar-track,
+        .products-container::-webkit-scrollbar-track {
+            background: rgba(240, 147, 35, 0.1);
+            border-radius: 10px;
+        }
+
+        .services-container::-webkit-scrollbar-thumb,
+        .categories-container::-webkit-scrollbar-thumb,
+        .products-container::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        /* صناديق الخدمات المحدثة */
+        .service-box {
+            min-width: 250px;
+            height: 180px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 35px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #2c3e50;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            scroll-snap-align: start;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .service-box:hover::before {
+            transform: translateY(0);
+        }
+
+        .service-box:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            color: white;
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* صناديق الأقسام */
+        .category-box {
+            min-width: 160px;
+            height: 80px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2c3e50;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            scroll-snap-align: start;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transform: scale(0);
+            border-radius: 30px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .category-box:hover::before {
+            transform: scale(1);
+        }
+
+        .category-box:hover {
+            transform: translateY(-10px);
+            color: white;
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* صناديق المنتجات المحدثة */
+        .product-box {
+            min-width: 250px;
+            height: 320px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            scroll-snap-align: start;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 85%;
+            background: var(--secondary-gradient);
+            border-radius: 30px 30px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-box:hover .product-image::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .product-price {
+            width: 100%;
+            height: 15%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 0 0 30px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-price::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .product-box:hover .product-price::before {
+            left: 100%;
+        }
+
+        .product-box:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .view-all-box {
+            background: var(--primary-gradient) !important;
+            color: white !important;
+            flex-direction: column;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .view-all-box::before {
+            display: none;
+        }
+
+        .arrow {
+            font-size: 24px;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* الفوتر المحدث */
+        .site-footer {
+            background: linear-gradient(135deg, rgba(240, 147, 35, 0.6), rgba(253, 186, 43, 0.6));
+            backdrop-filter: blur(20px);
+            color: #2c3e50;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .footer-col {
+            flex: 0 0 18%;
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            color: #2c3e50;
+            font-weight: 800;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #2c3e50 !important;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            display: block;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background: #2c3e50;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+        }
+
+        .footer-links a:hover {
+            color: #34495e !important;
+            padding-right: 10px;
+        }
+
+        /* التجاوب مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .gradient-banner {
+                width: calc(100% - 30px);
+                margin: 20px 15px;
+                height: 280px;
+                border-radius: 25px;
+            }
+            
+            .section {
+                margin: 40px 15px;
+            }
+            
+            .service-box {
+                min-width: 200px;
+                height: 150px;
+            }
+            
+            .category-box {
+                min-width: 140px;
+                height: 70px;
+            }
+            
+            .product-box {
+                min-width: 200px;
+                height: 280px;
+            }
+            
+            .footer-col {
+                flex: 0 0 48%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-col {
+                flex: 0 0 100%;
+                text-align: center;
+            }
+        }
+
+        /* تأثيرات إضافية */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatShape 15s linear infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            top: 80%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShape {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- الخلفية المتحركة -->
+    <div class="floating-shapes">
+        <div class="shape" style="width: 100px; height: 100px; background: linear-gradient(45deg, #f09323, #fdba2b); border-radius: 50%;"></div>
+        <div class="shape" style="width: 60px; height: 60px; background: linear-gradient(45deg, #fdba2b, #f09323); border-radius: 30%;"></div>
+        <div class="shape" style="width: 80px; height: 80px; background: linear-gradient(45deg, #f09323, #fdba2b); border-radius: 20%;"></div>
+    </div>
+
+    <!-- الهيدر -->
+    <header id="header">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50/f09323/ffffff?text=Logo" alt="شعار الموقع">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">الخدمات</a></li>
+                <li><a href="#">المنتجات</a></li>
+                <li><a href="#">الأقسام</a></li>
+            </ul>
+        </nav>
+        <div class="header-buttons">
+            <a href="#" class="contact-btn">اتصل بنا</a>
+            <a href="#" class="about-btn">من نحن</a>
+        </div>
+    </header>
+
+    <!-- محتوى الصفحة -->
+    <main>
+        <!-- البانر -->
+        <div class="gradient-banner">
+            <div class="banner-slider">
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400/34495e/ffffff?text=Banner+1" alt="بانر 1" class="banner-img">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400/2c3e50/ffffff?text=Banner+2" alt="بانر 2" class="banner-img">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400/3498db/ffffff?text=Banner+3" alt="بانر 3" class="banner-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم الخدمات -->
+        <div class="section services-section">
+            <div class="services-header">
+                <h2>الخدمات</h2>
+                <a href="#" class="view-all">عرض الكل ←</a>
+            </div>
+            
+            <div class="scroll-container">
+                <div class="services-container">
+                    <div class="service-box">خدمات التطوير</div>
+                    <div class="service-box">خدمات التصميم</div>
+                    <div class="service-box">خدمات التسويق</div>
+                    <div class="service-box">خدمات الاستشارة</div>
+                    <div class="service-box">خدمات الصيانة</div>
+                    <div class="service-box">خدمات الدعم الفني</div>
+                    <div class="service-box">خدمات التدريب</div>
+                    <div class="service-box">خدمات الأمان</div>
+                    <a href="#" class="service-box view-all-box">
+                        عرض الكل
+                        <span class="arrow">←</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأقسام -->
+        <div class="section categories-section">
+            <div class="scroll-container">
+                <div class="categories-container">
+                    <div class="category-box">إلكترونيات</div>
+                    <div class="category-box">أثاث منزلي</div>
+                    <div class="category-box">ملابس</div>
+                    <div class="category-box">رياضة</div>
+                    <div class="category-box">كتب</div>
+                    <div class="category-box">ألعاب</div>
+                    <div class="category-box">طعام</div>
+                    <a href="#" class="category-box view-all-box">
+                        عرض الكل
+                        <span class="arrow">←</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم المنتجات -->
+        <div class="section products-section">
+            <div class="section-header">
+                <h2>المنتجات</h2>
+                <a href="#" class="view-all">عرض الكل ←</a>
+            </div>
+            
+            <!-- قسم منتجات 1 -->
+            <div class="product-category">
+                <h3 class="category-title">أجهزة إلكترونية</h3>
+                <div class="products-container">
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">250 ر.س</div>
+                    </div>
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">350 ر.س</div>
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">450 ر.س</div>
+                    </div>
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">550 ر.س</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم منتجات 2 -->
+            <div class="product-category">
+                <h3 class="category-title">أثاث منزلي</h3>
+                <div class="products-container">
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">1200 ر.س</div>
+                    </div>
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">950 ر.س</div>
+                    </div>
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">800 ر.س</div>
+                    </div>
+                    <div class="product-box">
+                        <div class="product-image"></div>
+                        <div class="product-price">1500 ر.س</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- الصف الأول -->
+            <div class="footer-row">
+                <!-- السياسات -->
+                <div class="footer-col">
+                    <h3 class="footer-title">السياسات</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الشروط والأحكام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">سياسة الاستبدال والإرجاع</a></li>
+                        <li><a href="#">سياسة التوصيل</a></li>
+                        <li><a href="#">سياسة إلغاء الطلب</a></li>
+                    </ul>
+                </div>
+                
+                <!-- الموقع الإلكتروني -->
+                <div class="footer-col">
+                    <h3 class="footer-title">الموقع الإلكتروني</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">الخدمات</a></li>
+                        <li><a href="#">المنتجات</a></li>
+                        <li><a href="#">الأقسام</a></li>
+                    </ul>
+                </div>
+                
+                <!-- المزيد عنا -->
+                <div class="footer-col">
+                    <h3 class="footer-title">المزيد عنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">رؤيتنا</a></li>
+                        <li><a href="#">رسالتنا</a></li>
+                        <li><a href="#">قيمنا</a></li>
+                    </ul>
+                </div>
+                
+                <!-- الدعم الفني -->
+                <div class="footer-col">
+                    <h3 class="footer-title">الدعم الفني</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="tel:0500000000">0500000000</a></li>
+                        <li><a href="mailto:ex@gmail.com">ex@gmail.com</a></li>
+                        <li>أوقات الدعم الفني</li>
+                    </ul>
+                </div>
+                
+                <!-- الفروع -->
+                <div class="footer-col">
+                    <h3 class="footer-title">الفروع</h3>
+                    <div class="branch-info">
+                        <p>اسم الفرع</p>
+                        <img src="qrcode.png" alt="QR Code" class="qrcode">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصف الثاني - أوقات العمل -->
+            <div class="footer-row work-times">
+                <div class="footer-col full-width">
+                    <p class="work-hours">
+                        <span>أوقات العمل الرسمية:</span> 
+                        من 7 الصباح إلى 2 الظهر - من 4 العصر حتى 12 الليل
+                        <span class="divider">|</span>
+                        <span>أوقات الدعم الفني:</span> 
+                        أوقات العمل الرسمية
+                    </p>
+                </div>
+            </div>
+            
+            <!-- حقوق النشر -->
+            <div class="footer-row copyright">
+                <div class="footer-col full-width">
+                    <p>© 2023 جميع الحقوق محفوظة لموقعنا</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        // تهيئة السلايدر
+        $(document).ready(function(){
+            $('.banner-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                autoplay: true,
+                autoplaySpeed: 3000,
+                prevArrow: '<button type="button" class="slick-prev">←</button>',
+                nextArrow: '<button type="button" class="slick-next">→</button>',
+                rtl: true
+            });
+
+            // تأثير التمرير للهيدر
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('#header').addClass('scrolled');
+                } else {
+                    $('#header').removeClass('scrolled');
+                }
+            });
+
+            // تأثيرات الظهور التدريجي للأقسام
+            $(window).scroll(function() {
+                $('.section').each(function() {
+                    var sectionTop = $(this).offset().top;
+                    var scrollPos = $(window).scrollTop() + $(window).height();
+                    
+                    if (scrollPos > sectionTop + 100) {
+                        $(this).css({
+                            'opacity': '1',
+                            'transform': 'translateY(0)'
+                        });
+                    }
+                });
+            });
+
+            // إنشاء الجسيمات المتحركة في الخلفية
+            function createParticles() {
+                const particlesBg = document.createElement('div');
+                particlesBg.className = 'particles-bg';
+                document.body.appendChild(particlesBg);
+
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // أحجام وألوان عشوائية
+                    const size = Math.random() * 10 + 5;
+                    const opacity = Math.random() * 0.5 + 0.3;
+                    const delay = Math.random() * 10;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.opacity = opacity;
+                    particle.style.animationDelay = `${delay}s`;
+                    
+                    // وضع عشوائي
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    particlesBg.appendChild(particle);
+                }
+            }
+
+            createParticles();
+        });
+    </script>
+</body>
+</html>
